@@ -1,0 +1,21 @@
+# --- Xcode ---
+# User settings
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+
+# Build generated
+build/
+DerivedData/
+
+# Architecture & Packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# --- Swift Package Manager ---
+.swiftpm/
+.build/
+
+# --- macOS ---
+.DS_Store
