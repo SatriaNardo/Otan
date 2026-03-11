@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		69D4F70E2F61555A005E30B5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D4F70D2F61555A005E30B5 /* WidgetKit.framework */; };
+		69D4F7102F61555A005E30B5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D4F70F2F61555A005E30B5 /* SwiftUI.framework */; };
+		69D4F71D2F61555B005E30B5 /* StreakWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 69D4F70B2F61555A005E30B5 /* StreakWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0D76D6C62F606B7400712AF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +27,47 @@
 			remoteGlobalIDString = 0D76D6B72F606B7400712AF9;
 			remoteInfo = Literacy;
 		};
+		69D4F71B2F61555B005E30B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D76D6B02F606B7400712AF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69D4F70A2F61555A005E30B5;
+			remoteInfo = StreakWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		69D4F71E2F61555B005E30B5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				69D4F71D2F61555B005E30B5 /* StreakWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0D76D6B82F606B7400712AF9 /* Literacy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Literacy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D76D6C52F606B7400712AF9 /* LiteracyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteracyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D76D6CF2F606B7400712AF9 /* LiteracyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteracyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D4F70B2F61555A005E30B5 /* StreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D4F70D2F61555A005E30B5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		69D4F70F2F61555A005E30B5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		69D4F7212F61555B005E30B5 /* Exceptions for "StreakWidget" folder in "StreakWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 69D4F70A2F61555A005E30B5 /* StreakWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0D76D6BA2F606B7400712AF9 /* Literacy */ = {
@@ -43,6 +83,14 @@
 		0D76D6D22F606B7400712AF9 /* LiteracyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = LiteracyUITests;
+			sourceTree = "<group>";
+		};
+		69D4F7112F61555A005E30B5 /* StreakWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				69D4F7212F61555B005E30B5 /* Exceptions for "StreakWidget" folder in "StreakWidgetExtension" target */,
+			);
+			path = StreakWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +117,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69D4F7082F61555A005E30B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D4F7102F61555A005E30B5 /* SwiftUI.framework in Frameworks */,
+				69D4F70E2F61555A005E30B5 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +135,8 @@
 				0D76D6BA2F606B7400712AF9 /* Literacy */,
 				0D76D6C82F606B7400712AF9 /* LiteracyTests */,
 				0D76D6D22F606B7400712AF9 /* LiteracyUITests */,
+				69D4F7112F61555A005E30B5 /* StreakWidget */,
+				69D4F70C2F61555A005E30B5 /* Frameworks */,
 				0D76D6B92F606B7400712AF9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +147,18 @@
 				0D76D6B82F606B7400712AF9 /* Literacy.app */,
 				0D76D6C52F606B7400712AF9 /* LiteracyTests.xctest */,
 				0D76D6CF2F606B7400712AF9 /* LiteracyUITests.xctest */,
+				69D4F70B2F61555A005E30B5 /* StreakWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		69D4F70C2F61555A005E30B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69D4F70D2F61555A005E30B5 /* WidgetKit.framework */,
+				69D4F70F2F61555A005E30B5 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +171,12 @@
 				0D76D6B42F606B7400712AF9 /* Sources */,
 				0D76D6B52F606B7400712AF9 /* Frameworks */,
 				0D76D6B62F606B7400712AF9 /* Resources */,
+				69D4F71E2F61555B005E30B5 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				69D4F71C2F61555B005E30B5 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0D76D6BA2F606B7400712AF9 /* Literacy */,
@@ -163,6 +234,28 @@
 			productReference = 0D76D6CF2F606B7400712AF9 /* LiteracyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		69D4F70A2F61555A005E30B5 /* StreakWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69D4F7222F61555B005E30B5 /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */;
+			buildPhases = (
+				69D4F7072F61555A005E30B5 /* Sources */,
+				69D4F7082F61555A005E30B5 /* Frameworks */,
+				69D4F7092F61555A005E30B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				69D4F7112F61555A005E30B5 /* StreakWidget */,
+			);
+			name = StreakWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = StreakWidgetExtension;
+			productReference = 69D4F70B2F61555A005E30B5 /* StreakWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +277,9 @@
 						CreatedOnToolsVersion = 26.3;
 						TestTargetID = 0D76D6B72F606B7400712AF9;
 					};
+					69D4F70A2F61555A005E30B5 = {
+						CreatedOnToolsVersion = 26.3;
+					};
 				};
 			};
 			buildConfigurationList = 0D76D6B32F606B7400712AF9 /* Build configuration list for PBXProject "Literacy" */;
@@ -203,6 +299,7 @@
 				0D76D6B72F606B7400712AF9 /* Literacy */,
 				0D76D6C42F606B7400712AF9 /* LiteracyTests */,
 				0D76D6CE2F606B7400712AF9 /* LiteracyUITests */,
+				69D4F70A2F61555A005E30B5 /* StreakWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +320,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0D76D6CD2F606B7400712AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69D4F7092F61555A005E30B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +357,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69D4F7072F61555A005E30B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +376,11 @@
 			isa = PBXTargetDependency;
 			target = 0D76D6B72F606B7400712AF9 /* Literacy */;
 			targetProxy = 0D76D6D02F606B7400712AF9 /* PBXContainerItemProxy */;
+		};
+		69D4F71C2F61555B005E30B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69D4F70A2F61555A005E30B5 /* StreakWidgetExtension */;
+			targetProxy = 69D4F71B2F61555B005E30B5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -392,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -436,7 +552,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -479,7 +595,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
@@ -505,7 +621,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
@@ -530,7 +646,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
@@ -555,7 +671,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3N5749H378;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
@@ -572,6 +688,71 @@
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_TARGET_NAME = Literacy;
 				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		69D4F71F2F61555B005E30B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SELF.Literacy.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		69D4F7202F61555B005E30B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5VZU5CTZS2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SELF.Literacy.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -610,6 +791,15 @@
 			buildConfigurations = (
 				0D76D6E02F606B7400712AF9 /* Debug */,
 				0D76D6E12F606B7400712AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69D4F7222F61555B005E30B5 /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69D4F71F2F61555B005E30B5 /* Debug */,
+				69D4F7202F61555B005E30B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
