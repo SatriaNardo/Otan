@@ -109,4 +109,4 @@ struct StreakWidget: Widget {
 } timeline: {
     SimpleEntry(date: .now, activeDaysCount: 5, missedDaysCount: 0)
     SimpleEntry(date: .now, activeDaysCount: 0, missedDaysCount: 4)
-}ir
+}
