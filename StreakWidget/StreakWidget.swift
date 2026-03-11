@@ -4,48 +4,86 @@ import SwiftUI
 // 1. THE MODEL
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let currentStreak: Int
-    let imageName: String
+    let activeDaysCount: Int
+    let missedDaysCount: Int
+    
+    // We need to calculate these two based on our logic
+    var displayEmoji: (Int, String) {
+        // This calls the logic we wrote
+        return Provider.decideStatus(active: activeDaysCount, missed: missedDaysCount)
+    }
 }
 
-// 2. THE BRAIN (Backend)
+// 2. THE BRAIN
 struct Provider: TimelineProvider {
+    
+    // Static so the Model can call it easily
+    static func decideStatus(active: Int, missed: Int) -> (Int, String) {
+        if active >= 3 {
+            return (active, "streak_happy")
+        } else if missed >= 3 {
+            return (missed, "streak_mad")
+        } else {
+            if missed > 0 {
+                return (missed, "streak_neutral")
+            } else {
+                return (active, "streak_neutral")
+            }
+        }
+    }
+    
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), currentStreak: 0, imageName: "neutral_character")
+        SimpleEntry(date: Date(), activeDaysCount: 0, missedDaysCount: 0)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), currentStreak: 5, imageName: "happy_character")
+        let entry = SimpleEntry(date: Date(), activeDaysCount: 5, missedDaysCount: 0)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-        
-        // For now, we just create one single snapshot for right now
-        let entry = SimpleEntry(date: Date(), currentStreak: 5, imageName: "happy_character")
-        entries.append(entry)
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let entry = SimpleEntry(date: Date(), activeDaysCount: 5, missedDaysCount: 0)
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
 }
 
-// 3. THE FACE (Frontend)
+// 3. THE FACE
 struct StreakWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Streak: \(entry.currentStreak)")
-                .font(.headline)
-            Text("Image: \(entry.imageName)")
-                .font(.caption)
+        let (number, imageName) = entry.displayEmoji
+        
+        ZStack {
+            // Background Image
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            
+            // Text Overlay
+            VStack {
+                Spacer()
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(number)")
+                            .font(.system(size: 36, weight: .bold))
+                        Text("DAY STREAK")
+                            .font(.caption2)
+                            .fontWeight(.black)
+                    }
+                    .padding(8)
+                    .background(.white.opacity(0.8))
+                    .cornerRadius(8)
+                    Spacer()
+                }
+            }
+            .padding(10)
         }
     }
 }
 
-// 4. THE WIDGET SETUP
+// 4. THE SETUP
 struct StreakWidget: Widget {
     let kind: String = "StreakWidget"
 
@@ -65,9 +103,10 @@ struct StreakWidget: Widget {
     }
 }
 
-// 5. THE PREVIEW (What you see in Xcode)
+// 5. THE PREVIEW
 #Preview(as: .systemSmall) {
     StreakWidget()
 } timeline: {
-    SimpleEntry(date: .now, currentStreak: 5, imageName: "happy_character")
-}
+    SimpleEntry(date: .now, activeDaysCount: 5, missedDaysCount: 0)
+    SimpleEntry(date: .now, activeDaysCount: 0, missedDaysCount: 4)
+}ir

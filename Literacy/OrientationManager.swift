@@ -1,5 +1,5 @@
 import SwiftUI
-import UIKit
+// import UIKit
 import Combine
 
 class OrientationManager: ObservableObject {

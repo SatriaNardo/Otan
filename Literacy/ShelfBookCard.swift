@@ -1,5 +1,5 @@
 import SwiftUI
-import UIKit // ⚠️ Don't forget this so we can check for UIImage!
+// import UIKit // ⚠️ Don't forget this so we can check for UIImage!
 
 struct ShelfBookCard: View {
     let book: Book
