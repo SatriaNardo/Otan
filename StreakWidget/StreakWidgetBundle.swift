@@ -12,6 +12,5 @@ import SwiftUI
 struct StreakWidgetBundle: WidgetBundle {
     var body: some Widget {
         StreakWidget()
-        StreakWidgetControl()
     }
 }
