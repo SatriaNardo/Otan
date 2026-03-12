@@ -1,5 +1,4 @@
 import SwiftUI
-//import UIKit
 
 struct BookDetailView: View {
     let book: Book
@@ -123,12 +122,33 @@ struct BookDetailView: View {
         .persistentSystemOverlays(.hidden)
         .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
+        
+        // --- THE FIX: Hard lock to Landscape ---
+        .onAppear {
+        // 1. Tell iOS sensors: "ONLY allow landscape right now"
+            AppDelegate.orientationLock = .landscape
+            
+            // 2. Flip the screen natively
+            OrientationManager.shared.lock(.landscape)
+            
+            // 3. Force modern iOS 16+ to update its geometry immediately
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscape))
+            }
+        }
+            
+            // --- THE FIX: Hard lock back to Portrait ---
         .onDisappear {
-                    // THE ULTIMATE SAFETY CHECK
-                    // If the library tap didn't rotate it, this 0.2s delay will force it.
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        OrientationManager.shared.lock(.portrait)
-                    }
-                }
+            // 1. Tell iOS sensors: "Okay, we are allowed to go back to portrait"
+            AppDelegate.orientationLock = .portrait
+            
+            // 2. Flip the screen back
+            OrientationManager.shared.lock(.portrait)
+            
+            // 3. Force modern iOS 16+ to update its geometry immediately
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+            }
+            }
+        }
     }
-}

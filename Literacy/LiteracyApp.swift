@@ -3,7 +3,7 @@ import UserNotifications
 
 @main
 struct LiteracyApp: App {
-    // 1. Connect the AppDelegate to handle background/foreground logic
+    // 1. Connect the AppDelegate to handle background/foreground logic AND orientation
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     // 2. Initialize your manager once at the top level
@@ -18,10 +18,24 @@ struct LiteracyApp: App {
     }
 }
 
-// --- THE NOTIFICATION LISTENER ---
-// This class is the "Police Officer" that tells iOS:
-// "I don't care if the app is open, show the alert anyway!"
+// --- THE APP DELEGATE (Notifications + Orientation Lock) ---
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    // ==========================================
+    // MARK: - 1. ORIENTATION LOCK (The Bouncer)
+    // ==========================================
+    
+    // By default, we want the rest of your app to stay in Portrait
+    static var orientationLock = UIInterfaceOrientationMask.portrait
+    
+    // iOS constantly asks this function: "Am I allowed to rotate right now?"
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationLock
+    }
+    
+    // ==========================================
+    // MARK: - 2. NOTIFICATIONS (The Police Officer)
+    // ==========================================
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Set this class as the delegate for notifications

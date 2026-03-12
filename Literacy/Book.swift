@@ -15,6 +15,11 @@ enum BookCategory: String, CaseIterable {
     case e = "BEooo"
     case f = "Reoooo"
 }
+enum Duration: String, CaseIterable {
+    case low = "3-5 Minutes"
+    case medium = "5-7 Minutes"
+    case high = "7-10 Minutes"
+}
 
 // --- 1. THE UPDATED BLUEPRINT ---
 struct Book: Identifiable {
@@ -22,18 +27,15 @@ struct Book: Identifiable {
     let title: String
     let imageName: String
     let category: BookCategory
-    // An array of strings, where each string represents one page of story text.
-    // This allows for books with different lengths of content.
+    let duration: Duration
     let storyPages: [String]
-        
-    // The set of True/False quiz questions for this book
     let quizQuestions: [QuizQuestion]
 }
 
 // --- 2. THE UPDATED DATABASE ---
 let mockBooks = [
     // --- CATEGORY A ---
-    Book(title: "The Sleepy Bear", imageName: "cat", category: .a, storyPages: [
+    Book(title: "The Sleepy Bear", imageName: "cat", category: .a, duration: .low, storyPages: [
         "It was a quiet night, and the sleepy bear found a cozy spot to sleep.",
         "He closed his eyes, and soon he was fast asleep..."
     ], quizQuestions: [
@@ -41,7 +43,7 @@ let mockBooks = [
         QuizQuestion(questionText: "The bear went to sleep?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "The Lost Kitten", imageName: "kitten", category: .a, storyPages: [
+    Book(title: "The Lost Kitten", imageName: "cat", category: .a,duration: .low, storyPages: [
         "A small kitten got separated from its mother in the big city.",
         "It wandered the streets alone, looking for a warm place to rest..."
     ], quizQuestions: [
@@ -49,7 +51,7 @@ let mockBooks = [
         QuizQuestion(questionText: "The city was very quiet?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "The Brave Puppy", imageName: "puppy", category: .a, storyPages: [
+    Book(title: "The Brave Puppy", imageName: "cat", category: .a,duration: .low, storyPages: [
         "The puppy saw a big shadow and growled bravely.",
         "It was just a small bird, but the puppy felt like a hero!"
     ], quizQuestions: [
@@ -59,7 +61,7 @@ let mockBooks = [
     ]),
 
     // --- CATEGORY B ---
-    Book(title: "Sunny Meadows", imageName: "meadow", category: .b, storyPages: [
+    Book(title: "Sunny Meadows", imageName: "Bear", category: .b,duration: .medium, storyPages: [
         "Flowers bloom in the sun. The grass is very green.",
         "Butterflies fly over the meadow all day long."
     ], quizQuestions: [
@@ -67,7 +69,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Do butterflies fly there?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "The Quiet Forest", imageName: "forest", category: .b, storyPages: [
+    Book(title: "The Quiet Forest", imageName: "cat", category: .b,duration: .medium, storyPages: [
         "The trees are tall and the air is fresh.",
         "Deep in the forest, you can hear the river flowing."
     ], quizQuestions: [
@@ -75,7 +77,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Is there a river?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "Deep Blue Sea", imageName: "sea", category: .b, storyPages: [
+    Book(title: "Deep Blue Sea", imageName: "cat", category: .b,duration: .high, storyPages: [
         "Fish swim fast in the blue water.",
         "The whale is the king of the ocean."
     ], quizQuestions: [
@@ -85,7 +87,7 @@ let mockBooks = [
     ]),
 
     // --- CATEGORY C ---
-    Book(title: "Rocket to Mars", imageName: "rocket", category: .c, storyPages: [
+    Book(title: "Rocket to Mars", imageName: "bear", category: .c,duration: .high, storyPages: [
         "The rocket goes 3, 2, 1... Blast off!",
         "Soon, the astronauts will see the red planet."
     ], quizQuestions: [
@@ -93,7 +95,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Did the rocket explode?", correctAnswer: false),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "Jungle Trek", imageName: "jungle", category: .c, storyPages: [
+    Book(title: "Jungle Trek", imageName: "bear", category: .c,duration: .low, storyPages: [
         "The monkey swings from the vines.",
         "Watch out for the sleeping tiger under the tree!"
     ], quizQuestions: [
@@ -101,7 +103,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Is the tiger awake?", correctAnswer: false),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "Mountain High", imageName: "mountain", category: .c, storyPages: [
+    Book(title: "Mountain High", imageName: "Solaris", category: .c,duration: .medium,  storyPages: [
         "The snow on top of the mountain is cold.",
         "We can see the whole world from up here."
     ], quizQuestions: [
@@ -111,7 +113,7 @@ let mockBooks = [
     ]),
 
     // --- CATEGORY D ---
-    Book(title: "Baking Cake", imageName: "cake", category: .d, storyPages: [
+    Book(title: "Baking Cake", imageName: "Solaris", category: .d,duration: .low, storyPages: [
         "Mix the flour and the eggs in a big bowl.",
         "The oven is hot, and the cake smells delicious."
     ], quizQuestions: [
@@ -119,7 +121,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Is the oven cold?", correctAnswer: false),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "First Day School", imageName: "school", category: .d, storyPages: [
+    Book(title: "First Day School", imageName: "cat", category: .d,duration: .high, storyPages: [
         "I have my new bag and my shiny shoes.",
         "The teacher smiled and said welcome to class."
     ], quizQuestions: [
@@ -127,7 +129,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Was the teacher mean?", correctAnswer: false),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "The Little Garden", imageName: "garden", category: .d, storyPages: [
+    Book(title: "The Little Garden", imageName: "bear", category: .d,duration: .medium, storyPages: [
         "I plant a small seed in the dark dirt.",
         "With water and sun, it will grow into a flower."
     ], quizQuestions: [
@@ -137,7 +139,7 @@ let mockBooks = [
     ]),
 
     // --- CATEGORY E ---
-    Book(title: "How Rain Falls", imageName: "rain", category: .e, storyPages: [
+    Book(title: "How Rain Falls", imageName: "bear", category: .e,duration: .high, storyPages: [
         "Clouds get heavy with water and turn gray.",
         "Then the drops fall down to water the plants."
     ], quizQuestions: [
@@ -145,7 +147,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Does rain help plants?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "Busy Bees", imageName: "bees", category: .e, storyPages: [
+    Book(title: "Busy Bees", imageName: "cat", category: .e,duration: .high, storyPages: [
         "Bees fly to flowers to find sweet nectar.",
         "They take it back to the hive to make honey."
     ], quizQuestions: [
@@ -153,7 +155,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Do they find nectar?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "Seed to Tree", imageName: "tree", category: .e, storyPages: [
+    Book(title: "Seed to Tree", imageName: "cat", category: .e,duration: .low, storyPages: [
         "An acorn falls from a tall oak tree.",
         "In many years, it will be a giant tree too."
     ], quizQuestions: [
@@ -163,7 +165,7 @@ let mockBooks = [
     ]),
 
     // --- CATEGORY F ---
-    Book(title: "The Brave Knight", imageName: "knight", category: .f, storyPages: [
+    Book(title: "The Brave Knight", imageName: "Solaris", category: .f,duration: .medium, storyPages: [
         "The knight has a shiny sword and a shield.",
         "He protects the castle from the scary giant."
     ], quizQuestions: [
@@ -171,7 +173,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Is the giant friendly?", correctAnswer: false),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "Magic Wand", imageName: "wand", category: .f, storyPages: [
+    Book(title: "Magic Wand", imageName: "Solaris", category: .f,duration: .medium, storyPages: [
         "Wave the wand and say the magic words.",
         "The frog turned into a handsome prince!"
     ], quizQuestions: [
@@ -179,7 +181,7 @@ let mockBooks = [
         QuizQuestion(questionText: "Is the wand magic?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "Friendly Dragon", imageName: "dragon", category: .f, storyPages: [
+    Book(title: "Friendly Dragon", imageName: "Solaris", category: .f,duration: .low, storyPages: [
         "The dragon does not breathe fire; he breathes bubbles.",
         "He loves to fly through the clouds with his friends."
     ], quizQuestions: [
