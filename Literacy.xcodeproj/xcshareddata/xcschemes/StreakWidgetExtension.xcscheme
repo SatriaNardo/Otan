@@ -2,11 +2,7 @@
 <Scheme
    LastUpgradeVersion = "2630"
    wasCreatedForAppExtension = "YES"
-<<<<<<< HEAD
-   version = "2.0">
-=======
    version = "2.2">
->>>>>>> af69dbbe76271168516c4d07ab0942c3fd273b8d
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -18,8 +14,6 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
-<<<<<<< HEAD
-=======
             <AutocreatedTestPlanReference>
             </AutocreatedTestPlanReference>
          </BuildActionEntry>
@@ -29,7 +23,6 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
->>>>>>> af69dbbe76271168516c4d07ab0942c3fd273b8d
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "69D4F70A2F61555A005E30B5"
@@ -106,17 +99,14 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemMedium"
+            value = "systemSmall"
             isEnabled = "YES">
          </EnvironmentVariable>
-<<<<<<< HEAD
-=======
          <EnvironmentVariable
             key = "_XCWidgetKind"
             value = "StreakWidget"
             isEnabled = "YES">
          </EnvironmentVariable>
->>>>>>> af69dbbe76271168516c4d07ab0942c3fd273b8d
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

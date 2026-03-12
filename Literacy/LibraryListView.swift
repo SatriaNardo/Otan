@@ -7,6 +7,20 @@ struct LibraryListView: View {
     @State private var selectedBook: Book? = nil
     @State private var isReadyForBook: Bool = false
     
+    // --- NEW: Helper to check if we are filtering ---
+    private var isFiltering: Bool {
+        selectedCategory != nil || selectedDuration != nil
+    }
+    
+    // --- NEW: Helper to get filtered books for the vertical list ---
+    private var filteredBooks: [Book] {
+        mockBooks.filter { book in
+            let matchesCategory = (selectedCategory == nil || book.category == selectedCategory)
+            let matchesDuration = (selectedDuration == nil || book.duration == selectedDuration)
+            return matchesCategory && matchesDuration
+        }
+    }
+    
     private var safeAreaTop: CGFloat {
         let inset = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -15,10 +29,9 @@ struct LibraryListView: View {
         return max(inset, 59)
     }
 
-    // --- NEW HELPER: Adjusts padding so titles aren't hidden ---
     private var dynamicTopPadding: CGFloat {
         let isFiltering = (selectedCategory != nil || selectedDuration != nil)
-        return isFiltering ? 20 : 10 // Pushes content down 20pt when filtering
+        return isFiltering ? 20 : 10
     }
     
     var body: some View {
@@ -30,8 +43,8 @@ struct LibraryListView: View {
                     HeroSection { book in
                         prepareForBook(book)
                     }
-                    .opacity((selectedCategory == nil && selectedDuration == nil) ? 1 : 0)
-                    .frame(height: (selectedCategory == nil && selectedDuration == nil) ? nil : 0)
+                    .opacity(isFiltering ? 0 : 1)
+                    .frame(height: isFiltering ? 0 : nil)
                     .clipped()
                     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: selectedCategory)
                     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: selectedDuration)
@@ -42,23 +55,42 @@ struct LibraryListView: View {
                         Section(header:
                             FilterDropdownView(selectedCategory: $selectedCategory, selectedDuration: $selectedDuration)
                         ) {
-                            VStack(spacing: 24) {
-                                if let title = dynamicTitle {
-                                    Text(title)
-                                        .font(.headline)
-                                        .padding(.horizontal)
-                                        // Extra padding here if a title exists
-                                        .padding(.top, 5)
-                                        .id("CATEGORY_TITLE_ANCHOR")
+                            // --- BRANCHING LAYOUT LOGIC ---
+                            if isFiltering {
+                                // 1. FILTERED VIEW: Title + Large Vertical Cards
+                                VStack(spacing: 24) {
+                                    // Keep the dynamic title here!
+                                    if let title = dynamicTitle {
+                                        Text(title)
+                                            .font(.headline)
+                                            .padding(.horizontal)
+                                            .padding(.top, 5)
+                                            .id("CATEGORY_TITLE_ANCHOR")
+                                    }
+                                    
+                                    // The big vertical cards
+                                    VStack(spacing: 20) {
+                                        ForEach(filteredBooks) { book in
+                                            LargeBookCard(book: book) {
+                                                prepareForBook(book)
+                                            }
+                                        }
+                                    }
+                                    .padding(.horizontal, 20)
                                 }
+                                .padding(.top, dynamicTopPadding)
+                                .padding(.bottom, 40)
                                 
-                                ForEach(BookCategory.allCases, id: \.self) { category in
-                                    buildCategoryShelf(for: category)
+                            } else {
+                                // 2. DEFAULT VIEW: Horizontal Shelves
+                                VStack(spacing: 24) {
+                                    ForEach(BookCategory.allCases, id: \.self) { category in
+                                        buildCategoryShelf(for: category)
+                                    }
                                 }
+                                .padding(.top, dynamicTopPadding)
+                                .padding(.bottom, 5)
                             }
-                            // --- THE FIX: Apply the dynamic padding here ---
-                            .padding(.top, dynamicTopPadding)
-                            .padding(.bottom, 5)
                         }
                     }
                     .padding(.top, -(safeAreaTop + 10))
@@ -90,17 +122,15 @@ struct LibraryListView: View {
     
     @ViewBuilder
     private func buildCategoryShelf(for category: BookCategory) -> some View {
-        if selectedCategory == nil || selectedCategory == category {
-            let shelfBooks = mockBooks.filter { book in
-                let matchesCategory = (book.category == category)
-                let matchesDuration = (selectedDuration == nil || book.duration == selectedDuration)
-                return matchesCategory && matchesDuration
-            }
-            
-            if !shelfBooks.isEmpty {
-                BookShelf(title: category.rawValue, books: shelfBooks) { book in
-                    prepareForBook(book)
-                }
+        let shelfBooks = mockBooks.filter { book in
+            let matchesCategory = (book.category == category)
+            let matchesDuration = (selectedDuration == nil || book.duration == selectedDuration)
+            return matchesCategory && matchesDuration
+        }
+        
+        if !shelfBooks.isEmpty {
+            BookShelf(title: category.rawValue, books: shelfBooks) { book in
+                prepareForBook(book)
             }
         }
     }
@@ -136,3 +166,4 @@ struct LibraryListView: View {
         selectedBook = book
     }
 }
+
