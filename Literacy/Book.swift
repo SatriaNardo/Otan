@@ -33,7 +33,7 @@ struct Book: Identifiable {
 // --- 2. THE UPDATED DATABASE ---
 let mockBooks = [
     // --- CATEGORY A ---
-    Book(title: "The Sleepy Bear", imageName: "bear", category: .a, storyPages: [
+    Book(title: "The Sleepy Bear", imageName: "cat", category: .a, storyPages: [
         "It was a quiet night, and the sleepy bear found a cozy spot to sleep.",
         "He closed his eyes, and soon he was fast asleep..."
     ], quizQuestions: [

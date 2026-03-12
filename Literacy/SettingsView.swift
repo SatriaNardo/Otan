@@ -9,6 +9,9 @@ struct SettingsView: View {
                 .padding()
             Text("Settings Screen")
                 .font(.title2)
+            NativeGifView(name: "cat")
+                .frame(width: 150, height: 150)
+                .padding(.top, 50)
         }
     }
 }
