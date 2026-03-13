@@ -2,50 +2,36 @@ import SwiftUI
 
 struct ContentView: View {
     // --- 1. APP STATES ---
-    @State private var isOpeningPageVisible = true // Control the welcome screen
-    @State private var selectedTab = 0
+    @State private var isOpeningPageVisible = true
     
     var body: some View {
         ZStack {
             if isOpeningPageVisible {
-                // --- 2. THE OPENING PAGE (Lion Page) ---
-                // We pass the binding so the button can turn this off
+                // --- 2. THE OPENING PAGE ---
                 OnboardingPageView(isOpeningPageVisible: $isOpeningPageVisible)
-                    .zIndex(1) // Keeps this on top of the tabs during the flip
+                    .zIndex(1)
                     .transition(.asymmetric(
                         insertion: .opacity,
                         removal: .move(edge: .bottom).combined(with: .opacity)
                     ))
             } else {
-                // --- 3. THE MAIN APP INTERFACE (Tabs) ---
-                TabView(selection: $selectedTab) {
-                    
-                    // TAB 1: HOME (Library)
-                    NavigationStack {
-                        LibraryListView()
-                    }
-                    .tabItem {
-                        Label("Home", systemImage: "house.fill")
-                    }
-                    .tag(0)
-
-                    // TAB 2: SETTINGS
-                    // (Note: Make sure you have a SettingsView.swift file!)
-                    SettingsView()
-                        .tabItem {
-                            Label("Settings", systemImage: "gearshape.fill")
+                // --- 3. MAIN INTERFACE (No more TabView!) ---
+                NavigationStack {
+                    LibraryListView()
+                        // Optional: Add a settings button to the top right
+                        // since the bottom tab for Settings is gone
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                NavigationLink(destination: SettingsView()) {
+                                    Image(systemName: "gearshape.fill")
+                                        .foregroundColor(.orange)
+                                }
+                            }
                         }
-                        .tag(1)
                 }
-                .accentColor(.orange)
-                .transition(.opacity) // Fades the tabs in smoothly
+                .transition(.opacity)
             }
         }
-        // This makes the transition feel high-end and cinematic
         .animation(.easeInOut(duration: 0.6), value: isOpeningPageVisible)
     }
-}
-
-#Preview {
-    ContentView()
 }

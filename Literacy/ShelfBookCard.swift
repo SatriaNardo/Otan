@@ -27,8 +27,8 @@ struct ShelfBookCard: View {
                             .frame(width: 165, height: 110)
                     }
                     
-                    // The dark translucent time pill
-                    Text("10 Menit")
+                    // --- THE FIX: Now using dynamic duration from the model ---
+                    Text(book.duration.rawValue)
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.white)
                         .padding(.horizontal, 10)
@@ -39,18 +39,16 @@ struct ShelfBookCard: View {
                 }
                 
                 // BOTTOM HALF: The Solid Color Title Block
-                HStack(alignment: .top) { // Aligns the text to the top
+                HStack(alignment: .top) {
                     Text(book.title)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
-                        .lineLimit(2) // Allows up to 2 lines
+                        .lineLimit(2)
                         .multilineTextAlignment(.leading)
-                        // --- THE FIX 1: Allow text to shrink up to 20% to fit if needed ---
                         .minimumScaleFactor(0.8)
                     
                     Spacer(minLength: 0)
                 }
-                // --- THE FIX 2: Adjusted padding to give the text more vertical space ---
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .frame(width: 165, height: 60, alignment: .topLeading)

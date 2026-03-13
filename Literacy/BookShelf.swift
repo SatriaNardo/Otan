@@ -11,10 +11,10 @@ struct BookShelf: View {
     // Assigns a unique color based on the shelf's title
     private var categoryColor: Color {
         switch title.lowercased() {
-        case "nature": return Color(red: 0.9, green: 0.85, blue: 0.2)   // Bright Yellow
-        case "animals": return Color(red: 0.85, green: 0.4, blue: 0.25)   // Orange
-        case "bedtime": return Color(red: 0.2, green: 0.3, blue: 0.5)     // Night Blue
-        case "reoooo": return Color(red: 0.9, green: 0.4, blue: 0.6) // Pink
+        case "alam": return Color(red: 0.9, green: 0.85, blue: 0.2)   // Bright Yellow
+        case "sosial": return Color(red: 0.85, green: 0.4, blue: 0.25)   // Orange
+        case "matematika": return Color(red: 0.2, green: 0.3, blue: 0.5)     // Night Blue
+        case "kesehatan": return Color(red: 0.9, green: 0.4, blue: 0.6) // Pink
         case "beooo": return Color(red: 0.4, green: 0.6, blue: 0.35)    // Green
         default: return Color.blue
         }

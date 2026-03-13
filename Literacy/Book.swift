@@ -41,40 +41,6 @@ struct Book: Identifiable {
 // --- 2. THE UPDATED DATABASE ---
 let mockBooks = [
     // --- CATEGORY A ---
-    Book(title: "Tito Tupai Belajar Berhitung", imageName: "CoverTito", category: .a, duration: .low, storyPages: [
-        // Now each page has text AND an image
-        StoryPage(text: "It was a quiet night, and the sleepy bear found a cozy spot to sleep.", imageName: "Solaris"),
-        StoryPage(text: "He closed his eyes, and soon he was fast asleep...", imageName: "grraf")
-    ], quizQuestions: [
-        QuizQuestion(questionText: "The bear was a noisy tiger?", correctAnswer: false),
-        QuizQuestion(questionText: "The bear went to sleep?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    
-    Book(title: "The Lost Kitten", imageName: "CoverTito", category: .b, duration: .low, storyPages: [
-        StoryPage(text: "A small kitten got separated from its mother in the big city.", imageName: "kitten_page1"),
-        StoryPage(text: "It wandered the streets alone, looking for a warm place to rest...", imageName: "kitten_page2")
-    ], quizQuestions: [
-        QuizQuestion(questionText: "The kitten was a big dog?", correctAnswer: false),
-        QuizQuestion(questionText: "The city was very quiet?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    
-    Book(title: "The Brave Puppy", imageName: "CoverTito", category: .c, duration: .low, storyPages: [
-        StoryPage(text: "The puppy saw a big shadow and growled bravely.", imageName: "puppy_page1"),
-        StoryPage(text: "It was just a small bird, but the puppy felt like a hero!", imageName: "puppy_page2")
-    ], quizQuestions: [
-        QuizQuestion(questionText: "The puppy was scared?", correctAnswer: false),
-        QuizQuestion(questionText: "The shadow was a bird?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    
-    Book(title: "", imageName: "", category: .a, duration: .low, storyPages: [
-        StoryPage(text: "", imageName: ""),
-    ], quizQuestions: [
-        QuizQuestion(questionText: "", correctAnswer: false)
-    ]),
-    
     Book(title: "Tito Tupai Belajar Berhitung", imageName: "tito-cover", category: .c, duration: .low, storyPages: [
         StoryPage(
             text: """
