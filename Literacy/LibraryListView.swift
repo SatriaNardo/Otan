@@ -88,7 +88,7 @@ struct LibraryListView: View {
                                         buildCategoryShelf(for: category)
                                     }
                                 }
-                                .padding(.top, dynamicTopPadding)
+                                .padding(.top, 0)
                                 .padding(.bottom, 5)
                             }
                         }

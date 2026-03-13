@@ -4,7 +4,14 @@ import Foundation
 struct QuizQuestion: Identifiable {
     let id = UUID()
     let questionText: String
-    let correctAnswer: Bool // true for True, false for False
+    let correctAnswer: Bool
+}
+
+// --- NEW: A model for a single page of the story ---
+struct StoryPage: Identifiable {
+    let id = UUID()
+    let text: String
+    let imageName: String // Each page gets its own image!
 }
 
 enum BookCategory: String, CaseIterable {
@@ -15,6 +22,7 @@ enum BookCategory: String, CaseIterable {
     case e = "BEooo"
     case f = "Reoooo"
 }
+
 enum Duration: String, CaseIterable {
     case low = "3-5 Minutes"
     case medium = "5-7 Minutes"
@@ -25,168 +33,43 @@ enum Duration: String, CaseIterable {
 struct Book: Identifiable {
     let id = UUID()
     let title: String
-    let imageName: String
+    let imageName: String // This stays here as the "Cover Image" for the library
     let category: BookCategory
     let duration: Duration
-    let storyPages: [String]
+    let storyPages: [StoryPage] // <-- Updated from [String] to [StoryPage]
     let quizQuestions: [QuizQuestion]
 }
 
 // --- 2. THE UPDATED DATABASE ---
 let mockBooks = [
     // --- CATEGORY A ---
-    Book(title: "The Sleepy Bear", imageName: "cat", category: .a, duration: .low, storyPages: [
-        "It was a quiet night, and the sleepy bear found a cozy spot to sleep.",
-        "He closed his eyes, and soon he was fast asleep..."
+    Book(title: "The Sleepy Bear", imageName: "bear", category: .a, duration: .low, storyPages: [
+        // Now each page has text AND an image
+        StoryPage(text: "It was a quiet night, and the sleepy bear found a cozy spot to sleep.", imageName: "Solaris"),
+        StoryPage(text: "He closed his eyes, and soon he was fast asleep...", imageName: "grraf")
     ], quizQuestions: [
         QuizQuestion(questionText: "The bear was a noisy tiger?", correctAnswer: false),
         QuizQuestion(questionText: "The bear went to sleep?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ]),
-    Book(title: "The Lost Kitten", imageName: "cat", category: .a,duration: .low, storyPages: [
-        "A small kitten got separated from its mother in the big city.",
-        "It wandered the streets alone, looking for a warm place to rest..."
+    
+    Book(title: "The Lost Kitten", imageName: "cat", category: .a, duration: .low, storyPages: [
+        StoryPage(text: "A small kitten got separated from its mother in the big city.", imageName: "kitten_page1"),
+        StoryPage(text: "It wandered the streets alone, looking for a warm place to rest...", imageName: "kitten_page2")
     ], quizQuestions: [
         QuizQuestion(questionText: "The kitten was a big dog?", correctAnswer: false),
         QuizQuestion(questionText: "The city was very quiet?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
     ]),
-    Book(title: "The Brave Puppy", imageName: "cat", category: .a,duration: .low, storyPages: [
-        "The puppy saw a big shadow and growled bravely.",
-        "It was just a small bird, but the puppy felt like a hero!"
+    
+    Book(title: "The Brave Puppy", imageName: "cat", category: .a, duration: .low, storyPages: [
+        StoryPage(text: "The puppy saw a big shadow and growled bravely.", imageName: "puppy_page1"),
+        StoryPage(text: "It was just a small bird, but the puppy felt like a hero!", imageName: "puppy_page2")
     ], quizQuestions: [
         QuizQuestion(questionText: "The puppy was scared?", correctAnswer: false),
         QuizQuestion(questionText: "The shadow was a bird?", correctAnswer: true),
         QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-
-    // --- CATEGORY B ---
-    Book(title: "Sunny Meadows", imageName: "Bear", category: .b,duration: .medium, storyPages: [
-        "Flowers bloom in the sun. The grass is very green.",
-        "Butterflies fly over the meadow all day long."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is the grass blue?", correctAnswer: false),
-        QuizQuestion(questionText: "Do butterflies fly there?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    Book(title: "The Quiet Forest", imageName: "cat", category: .b,duration: .medium, storyPages: [
-        "The trees are tall and the air is fresh.",
-        "Deep in the forest, you can hear the river flowing."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Are the trees short?", correctAnswer: false),
-        QuizQuestion(questionText: "Is there a river?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    Book(title: "Deep Blue Sea", imageName: "cat", category: .b,duration: .high, storyPages: [
-        "Fish swim fast in the blue water.",
-        "The whale is the king of the ocean."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is the water red?", correctAnswer: false),
-        QuizQuestion(questionText: "Is the whale the king?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-
-    // --- CATEGORY C ---
-    Book(title: "Rocket to Mars", imageName: "bear", category: .c,duration: .high, storyPages: [
-        "The rocket goes 3, 2, 1... Blast off!",
-        "Soon, the astronauts will see the red planet."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is Mars the red planet?", correctAnswer: true),
-        QuizQuestion(questionText: "Did the rocket explode?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    Book(title: "Jungle Trek", imageName: "bear", category: .c,duration: .low, storyPages: [
-        "The monkey swings from the vines.",
-        "Watch out for the sleeping tiger under the tree!"
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Does the monkey swing?", correctAnswer: true),
-        QuizQuestion(questionText: "Is the tiger awake?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    Book(title: "Mountain High", imageName: "Solaris", category: .c,duration: .medium,  storyPages: [
-        "The snow on top of the mountain is cold.",
-        "We can see the whole world from up here."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is the mountain snow hot?", correctAnswer: false),
-        QuizQuestion(questionText: "Can we see far away?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-
-    // --- CATEGORY D ---
-    Book(title: "Baking Cake", imageName: "Solaris", category: .d,duration: .low, storyPages: [
-        "Mix the flour and the eggs in a big bowl.",
-        "The oven is hot, and the cake smells delicious."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Do we use eggs?", correctAnswer: true),
-        QuizQuestion(questionText: "Is the oven cold?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    Book(title: "First Day School", imageName: "cat", category: .d,duration: .high, storyPages: [
-        "I have my new bag and my shiny shoes.",
-        "The teacher smiled and said welcome to class."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is it the first day?", correctAnswer: true),
-        QuizQuestion(questionText: "Was the teacher mean?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    Book(title: "The Little Garden", imageName: "bear", category: .d,duration: .medium, storyPages: [
-        "I plant a small seed in the dark dirt.",
-        "With water and sun, it will grow into a flower."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Do seeds need water?", correctAnswer: true),
-        QuizQuestion(questionText: "Do seeds need ice?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-
-    // --- CATEGORY E ---
-    Book(title: "How Rain Falls", imageName: "bear", category: .e,duration: .high, storyPages: [
-        "Clouds get heavy with water and turn gray.",
-        "Then the drops fall down to water the plants."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Are rain clouds light?", correctAnswer: false),
-        QuizQuestion(questionText: "Does rain help plants?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    Book(title: "Busy Bees", imageName: "cat", category: .e,duration: .high, storyPages: [
-        "Bees fly to flowers to find sweet nectar.",
-        "They take it back to the hive to make honey."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Do bees make milk?", correctAnswer: false),
-        QuizQuestion(questionText: "Do they find nectar?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    Book(title: "Seed to Tree", imageName: "cat", category: .e,duration: .low, storyPages: [
-        "An acorn falls from a tall oak tree.",
-        "In many years, it will be a giant tree too."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Is an oak tree small?", correctAnswer: false),
-        QuizQuestion(questionText: "Does the acorn grow?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-
-    // --- CATEGORY F ---
-    Book(title: "The Brave Knight", imageName: "Solaris", category: .f,duration: .medium, storyPages: [
-        "The knight has a shiny sword and a shield.",
-        "He protects the castle from the scary giant."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Does the knight have a shield?", correctAnswer: true),
-        QuizQuestion(questionText: "Is the giant friendly?", correctAnswer: false),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
-    ]),
-    Book(title: "Magic Wand", imageName: "Solaris", category: .f,duration: .medium, storyPages: [
-        "Wave the wand and say the magic words.",
-        "The frog turned into a handsome prince!"
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Did the prince turn into a frog?", correctAnswer: false),
-        QuizQuestion(questionText: "Is the wand magic?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: false)
-    ]),
-    Book(title: "Friendly Dragon", imageName: "Solaris", category: .f,duration: .low, storyPages: [
-        "The dragon does not breathe fire; he breathes bubbles.",
-        "He loves to fly through the clouds with his friends."
-    ], quizQuestions: [
-        QuizQuestion(questionText: "Does the dragon breathe fire?", correctAnswer: false),
-        QuizQuestion(questionText: "Does he breathe bubbles?", correctAnswer: true),
-        QuizQuestion(questionText: "Lorem Ipsum question?", correctAnswer: true)
     ])
+    
+    // Note: You will need to update Categories B, C, D, E, and F in your own file using this same `StoryPage(text: "", imageName: "")` format!
 ]

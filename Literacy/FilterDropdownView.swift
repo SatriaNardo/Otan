@@ -5,8 +5,6 @@ struct FilterDropdownView: View {
     @Binding var selectedDuration: Duration?
     
     @State private var activeSheet: SheetType? = nil
-    
-    // --- NEW: State for the reminder pop-up ---
     @State private var showingReminder = false
     
     enum SheetType: Identifiable {
@@ -16,7 +14,12 @@ struct FilterDropdownView: View {
     
     let orangeColor = Color(red: 0.85, green: 0.4, blue: 0.25)
     let greenColor = Color(red: 0.4, green: 0.6, blue: 0.35)
-    let yellowColor = Color(red: 0.95, green: 0.75, blue: 0.2) // A nice bright color for the bell
+    let yellowColor = Color(red: 0.95, green: 0.75, blue: 0.2)
+    
+    // 3D Shadow Colors
+    let orangeShadow = Color(red: 0.65, green: 0.25, blue: 0.1)
+    let greenShadow = Color(red: 0.25, green: 0.45, blue: 0.2)
+    let yellowShadow = Color(red: 0.75, green: 0.55, blue: 0.05)
     
     private var safeAreaTop: CGFloat {
         UIApplication.shared.connectedScenes
@@ -26,54 +29,77 @@ struct FilterDropdownView: View {
     }
     
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 8) {
             Button(action: { activeSheet = .category }) {
-                HStack {
+                HStack(spacing: 4) {
                     Text(selectedCategory?.rawValue ?? "Kategori")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                     Image(systemName: "chevron.down")
                 }
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 15, weight: .bold))
                 .foregroundColor(.white)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .background(orangeColor)
                 .cornerRadius(20)
+                .shadow(color: orangeShadow, radius: 0.5, x: 0, y: 4.5)
             }
             
             Button(action: { activeSheet = .duration }) {
-                HStack {
+                HStack(spacing: 4) {
                     Text(selectedDuration?.rawValue ?? "Durasi")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                     Image(systemName: "chevron.down")
                 }
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 15, weight: .bold))
                 .foregroundColor(.white)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .background(greenColor)
                 .cornerRadius(20)
+                .shadow(color: greenShadow, radius: 0.5, x: 0, y: 4.5)
             }
             
-            // This spacer pushes the category/duration left, and the bell right!
-            Spacer()
+            // --- THE FIX: First Spacer (pushes filters to the left) ---
+            Spacer(minLength: 4)
             
-            // --- NEW: The Reminder Button ---
+            if selectedCategory != nil || selectedDuration != nil {
+                Button(action: {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                        selectedCategory = nil
+                        selectedDuration = nil
+                    }
+                }) {
+                    Text("Hapus Filter")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundColor(.red)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                .transition(.opacity.combined(with: .scale))
+                
+                // --- THE FIX: Second Spacer (pushes Bell to the right, centering the text!) ---
+                Spacer(minLength: 4)
+            }
+            
             Button(action: { showingReminder = true }) {
                 Image(systemName: "bell.fill")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .padding(12)
-                    .background(yellowColor) // You can change this to any color you like
-                    .clipShape(Circle()) // Makes it a perfect circle
+                    .background(yellowColor)
+                    .clipShape(Circle())
+                    .shadow(color: yellowShadow, radius: 0.5, x: 0, y: 4.5)
             }
         }
         .padding(.horizontal)
-        .padding(.bottom, 10)
+        .padding(.bottom, 14)
         .frame(maxWidth: .infinity)
-        
         .padding(.top, safeAreaTop + 10)
         .background(Color.white)
         
-        // Sheet for Categories and Durations
         .sheet(item: $activeSheet) { sheetType in
             if sheetType == .category {
                 CategorySheet(selectedCategory: $selectedCategory, activeSheet: $activeSheet)
@@ -85,30 +111,27 @@ struct FilterDropdownView: View {
                     .presentationDragIndicator(.visible)
             }
         }
-        // --- NEW: Sheet for the Reminder Setup ---
-                .sheet(isPresented: $showingReminder) {
-                    ReminderView() // <--- Your view goes right here!
-                        // You can keep the detents if you want it to be a half-sheet,
-                        // or remove the next two lines if you want it to be a full-screen pop-up
-                        .presentationDetents([.medium, .large])
-                        .presentationDragIndicator(.visible)
-                }
+        .sheet(isPresented: $showingReminder) {
+            ReminderView()
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
     }
 }
+
 // MARK: - Bottom Sheet Views
 
 struct CategorySheet: View {
     @Binding var selectedCategory: BookCategory?
     @Binding var activeSheet: FilterDropdownView.SheetType?
     
-    // A palette of bright, kid-friendly colors
     let brightColors: [Color] = [
-        Color(red: 0.9, green: 0.3, blue: 0.4),  // Bright Pink/Red
-        Color(red: 0.2, green: 0.6, blue: 0.86), // Bright Blue
-        Color(red: 0.95, green: 0.6, blue: 0.1), // Yellow/Orange
-        Color(red: 0.5, green: 0.8, blue: 0.3),  // Lime Green
-        Color(red: 0.6, green: 0.4, blue: 0.8),  // Purple
-        Color(red: 0.2, green: 0.8, blue: 0.7)   // Teal
+        Color(red: 0.9, green: 0.3, blue: 0.4),
+        Color(red: 0.2, green: 0.6, blue: 0.86),
+        Color(red: 0.95, green: 0.6, blue: 0.1),
+        Color(red: 0.5, green: 0.8, blue: 0.3),
+        Color(red: 0.6, green: 0.4, blue: 0.8),
+        Color(red: 0.2, green: 0.8, blue: 0.7)
     ]
     
     var body: some View {
@@ -120,7 +143,6 @@ struct CategorySheet: View {
                         activeSheet = nil
                     }
                     
-                    // Assign a specific bright color to each category
                     ForEach(Array(BookCategory.allCases.enumerated()), id: \.element) { index, category in
                         let color = brightColors[index % brightColors.count]
                         
@@ -168,7 +190,6 @@ struct DurationSheet: View {
     }
 }
 
-// Reusable pill design
 struct MenuPill: View {
     let title: String
     let icon: String
@@ -188,6 +209,8 @@ struct MenuPill: View {
             .padding(.vertical, 16)
             .background(bgColor)
             .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.25), radius: 0.5, x: 0, y: 4.5)
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }

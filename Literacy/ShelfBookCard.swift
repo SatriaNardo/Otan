@@ -1,8 +1,9 @@
 import SwiftUI
-// import UIKit // ⚠️ Don't forget this so we can check for UIImage!
 
 struct ShelfBookCard: View {
     let book: Book
+    // --- NEW: Accepts a dynamic color from the shelf ---
+    let gradientColor: Color
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
@@ -12,17 +13,16 @@ struct ShelfBookCard: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 140, height: 140) // Lock the image to the square size
-                    .clipped() // Chop off any extra image that spills over
+                    .frame(width: 140, height: 140)
+                    .clipped()
             } else {
-                // Fallback gray box if you misspell an image name
                 Color(UIColor.systemGray5)
             }
             
             // --- 2. THE TEXT PROTECTION GRADIENT ---
-            // This adds a soft dark shadow at the bottom so the white text is always readable
+            // Replaced black with the dynamic category color
             LinearGradient(
-                gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.7)]),
+                gradient: Gradient(colors: [Color.clear, gradientColor.opacity(0.6), gradientColor]),
                 startPoint: .center,
                 endPoint: .bottom
             )
@@ -33,7 +33,7 @@ struct ShelfBookCard: View {
                     .font(.subheadline)
                     .bold()
                     .lineLimit(2)
-                    .foregroundColor(.white) // Changed to white so it pops on the image
+                    .foregroundColor(.white)
                 
                 HStack(spacing: 4) {
                     Image(systemName: "clock")
@@ -41,15 +41,11 @@ struct ShelfBookCard: View {
                     Text("10 Menit")
                         .font(.caption2)
                 }
-                .foregroundColor(.white.opacity(0.8)) // Slightly dimmed white
+                .foregroundColor(.white.opacity(0.9))
             }
             .padding(12)
         }
         .frame(width: 140, height: 140)
         .cornerRadius(16)
     }
-}
-
-#Preview {
-    ShelfBookCard(book: mockBooks[0])
 }

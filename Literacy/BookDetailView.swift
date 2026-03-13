@@ -54,21 +54,41 @@ struct BookDetailView: View {
                 ZStack(alignment: .bottomTrailing) {
                     Group {
                         if currentPageIndex < book.storyPages.count {
+                            let currentPage = book.storyPages[currentPageIndex]
+                            
                             HStack(spacing: 0) {
-                                // Left Side: Story Image
-                                if let uiImage = UIImage(named: book.imageName) {
-                                    Image(uiImage: uiImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                                        .clipped()
-                                } else {
-                                    Color.gray.opacity(0.1).frame(maxWidth: .infinity)
+                                // Left Side: Story Image (NOW WITH A FRAME!)
+                                ZStack {
+                                    // A soft background color for the "page" behind the picture
+                                    Color(UIColor.systemGray6)
+                                    
+                                    if let uiImage = UIImage(named: currentPage.imageName) {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            // --- THE FIX: Changed .fill to .fit so it won't crop! ---
+                                            .aspectRatio(contentMode: .fit)
+                                            // The image itself gets rounded corners
+                                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                                            // --- THE FRAME EFFECT ---
+                                            .padding(3) // Inner spacing (the thick white border)
+                                            .background(Color.white)
+                                            .clipShape(RoundedRectangle(cornerRadius: 24)) // Rounds the outer frame
+                                            .shadow(color: .black.opacity(0.15), radius: 12, x: 0, y: 8) // 3D drop shadow
+                                            .padding(10) // Outer spacing so it doesn't touch the edges of the screen
+                                    } else {
+                                        // Fallback if image is missing
+                                        RoundedRectangle(cornerRadius: 24)
+                                            .fill(Color.white)
+                                            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+                                            .overlay(Text("No Image").foregroundColor(.gray))
+                                            .padding(32)
+                                    }
                                 }
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                                 
                                 // Right Side: Story Text
                                 ZStack(alignment: .topLeading) {
-                                    BookStoryPageTextView(text: book.storyPages[currentPageIndex])
+                                    BookStoryPageTextView(text: currentPage.text)
                                         .id(currentPageIndex)
                                         .transition(currentTransition)
                                 }
@@ -86,7 +106,6 @@ struct BookDetailView: View {
                     }
                     
                     // --- 4. THE PAGINATION ARROWS (FIXED OVERLAY) ---
-                    // We place this inside the ZStack at the bottom trailing corner
                     SequentialPaginationView(
                         current: currentPageIndex,
                         total: totalPages,
@@ -123,32 +142,20 @@ struct BookDetailView: View {
         .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
         
-        // --- THE FIX: Hard lock to Landscape ---
         .onAppear {
-        // 1. Tell iOS sensors: "ONLY allow landscape right now"
             AppDelegate.orientationLock = .landscape
-            
-            // 2. Flip the screen natively
             OrientationManager.shared.lock(.landscape)
-            
-            // 3. Force modern iOS 16+ to update its geometry immediately
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscape))
             }
         }
-            
-            // --- THE FIX: Hard lock back to Portrait ---
+        
         .onDisappear {
-            // 1. Tell iOS sensors: "Okay, we are allowed to go back to portrait"
             AppDelegate.orientationLock = .portrait
-            
-            // 2. Flip the screen back
             OrientationManager.shared.lock(.portrait)
-            
-            // 3. Force modern iOS 16+ to update its geometry immediately
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
             }
-            }
         }
     }
+}
