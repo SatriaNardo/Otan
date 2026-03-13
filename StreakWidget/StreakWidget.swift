@@ -75,12 +75,16 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        // In the future, this is where we call StreakManager.getStreakStats()
-        // Currently hardcoded to test offline mode
-        let entry = SimpleEntry(date: Date(), activeDaysCount: 0, missedDaysCount: 5)
-        let timeline = Timeline(entries: [entry], policy: .atEnd)
-        completion(timeline)
-    }
+            // 1. Ask the StreakManager for the real data from the App Group
+            let stats = StreakManager.shared.getWidgetStats()
+            
+            // 2. Feed that real data into Otan's logic
+            let entry = SimpleEntry(date: Date(), activeDaysCount: stats.active, missedDaysCount: stats.missed)
+            
+            // 3. Update the widget!
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
+        }
 }
 
 // 3. THE FACE

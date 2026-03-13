@@ -111,6 +111,7 @@ struct BookDetailView: View {
                         total: totalPages,
                         onNext: {
                             if currentPageIndex == totalPages - 1 {
+                                StreakManager.shared.logStoryCompleted() // Save Streak for Widget
                                 OrientationManager.shared.lock(.portrait)
                                 dismiss()
                             } else {

@@ -54,12 +54,20 @@
 		0D76D6B82F606B7400712AF9 /* Literacy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Literacy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D76D6C52F606B7400712AF9 /* LiteracyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteracyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D76D6CF2F606B7400712AF9 /* LiteracyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteracyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		699B99F42F64051E00D54C89 /* StreakWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreakWidgetExtension.entitlements; sourceTree = "<group>"; };
 		69D4F70B2F61555A005E30B5 /* StreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D4F70D2F61555A005E30B5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		69D4F70F2F61555A005E30B5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		699B99F62F64058000D54C89 /* Exceptions for "Literacy" folder in "StreakWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				StreakManager.swift,
+			);
+			target = 69D4F70A2F61555A005E30B5 /* StreakWidgetExtension */;
+		};
 		69D4F7212F61555B005E30B5 /* Exceptions for "StreakWidget" folder in "StreakWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -72,6 +80,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0D76D6BA2F606B7400712AF9 /* Literacy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				699B99F62F64058000D54C89 /* Exceptions for "Literacy" folder in "StreakWidgetExtension" target */,
+			);
 			path = Literacy;
 			sourceTree = "<group>";
 		};
@@ -132,6 +143,7 @@
 		0D76D6AF2F606B7400712AF9 = {
 			isa = PBXGroup;
 			children = (
+				699B99F42F64051E00D54C89 /* StreakWidgetExtension.entitlements */,
 				0D76D6BA2F606B7400712AF9 /* Literacy */,
 				0D76D6C82F606B7400712AF9 /* LiteracyTests */,
 				0D76D6D22F606B7400712AF9 /* LiteracyUITests */,
@@ -506,6 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Literacy/Literacy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3N5749H378;
@@ -550,6 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Literacy/Literacy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3N5749H378;
@@ -696,6 +710,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3N5749H378;
@@ -728,6 +743,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3N5749H378;

@@ -4,7 +4,7 @@ struct SequentialPaginationView: View {
     // These properties allow the main BookDetailView to control the bar
     let current: Int
     let total: Int
-    let onNext: () -> Void
+    let onNext: () -> Void // These properties allow the main BookDetailView to control the bar
     let onBack: () -> Void
     
     var body: some View {
