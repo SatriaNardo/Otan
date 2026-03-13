@@ -9,11 +9,16 @@ struct HeroSection: View {
             if let book = featuredBook {
                 ZStack(alignment: .bottomLeading) {
                     
-                    SmartBookImage(imageName: book.imageName)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 300)
-                        // Moved .clipped() down to the ZStack level
+                    // --- THE BULLETPROOF FIX ---
+                    // Color.clear takes exactly the width of the screen.
+                    // Putting the image in the background forces it to obey the clear box's size
+                    // without accidentally stretching the ScrollView!
+                    Color.clear
+                        .background(
+                            SmartBookImage(imageName: book.imageName)
+                                .aspectRatio(contentMode: .fill)
+                        )
+                        .clipped()
                     
                     LinearGradient(
                         gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
@@ -48,10 +53,9 @@ struct HeroSection: View {
                     .padding(.leading, 24)
                     .padding(.bottom, 30)
                 }
-                // --- THE FIX IS THESE THREE LINES ---
-                .frame(height: 300) // 1. Lock the outer stack height
-                .contentShape(Rectangle()) // 2. Destroy the invisible overflowing tap box!
-                .clipped() // 3. Ensure nothing draws outside the lines
+                .frame(height: 300)
+                .contentShape(Rectangle())
+                .clipped()
                 
                 .onTapGesture {
                     onSelect(book)

@@ -62,7 +62,6 @@ struct FilterDropdownView: View {
                 .shadow(color: greenShadow, radius: 0.5, x: 0, y: 4.5)
             }
             
-            // --- THE FIX: First Spacer (pushes filters to the left) ---
             Spacer(minLength: 4)
             
             if selectedCategory != nil || selectedDuration != nil {
@@ -80,7 +79,6 @@ struct FilterDropdownView: View {
                 }
                 .transition(.opacity.combined(with: .scale))
                 
-                // --- THE FIX: Second Spacer (pushes Bell to the right, centering the text!) ---
                 Spacer(minLength: 4)
             }
             
@@ -107,7 +105,8 @@ struct FilterDropdownView: View {
                     .presentationDragIndicator(.visible)
             } else {
                 DurationSheet(selectedDuration: $selectedDuration, activeSheet: $activeSheet)
-                    .presentationDetents([.fraction(0.4), .medium])
+                    // --- THE FIX: Changed to match the CategorySheet's detents ---
+                    .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
             }
         }
