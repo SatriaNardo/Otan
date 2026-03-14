@@ -13,7 +13,6 @@ struct BookDetailView: View {
     
     // --- BRAND COLORS ---
     let bgColor = Color(red: 0.95, green: 0.95, blue: 0.96)
-    // --- THE FIX: Changed from green to orange ---
     let orangeButtonColor = Color(red: 0.85, green: 0.4, blue: 0.25)
     
     var body: some View {
@@ -38,16 +37,23 @@ struct BookDetailView: View {
                         
                         Spacer()
                         
-                        // Progress Dots
-                        HStack(spacing: 6) {
-                            ForEach(0..<totalPages, id: \.self) { index in
+                        // --- THE FIX: Continuous Progress Bar ---
+                        GeometryReader { barGeo in
+                            ZStack(alignment: .leading) {
+                                // 1. Empty gray track (Background)
                                 Capsule()
-                                    // --- THE FIX: Updated to orangeButtonColor ---
-                                    .fill(index <= currentPageIndex ? orangeButtonColor : Color.gray.opacity(0.3))
-                                    .frame(width: index <= currentPageIndex ? 24 : 8, height: 8)
-                                    .animation(.spring(), value: currentPageIndex)
+                                    .fill(Color.gray.opacity(0.3))
+                                
+                                // 2. Filled orange track (Foreground)
+                                Capsule()
+                                    .fill(orangeButtonColor)
+                                    // Calculates the percentage of completion
+                                    .frame(width: barGeo.size.width * (CGFloat(currentPageIndex + 1) / CGFloat(totalPages)))
+                                    .animation(.spring(response: 0.5, dampingFraction: 0.8), value: currentPageIndex)
                             }
                         }
+                        .frame(height: 8) // Thickness of the bar
+                        .frame(maxWidth: 300) // Prevents the bar from getting too long on big screens
                         
                         Spacer()
                         
@@ -97,7 +103,7 @@ struct BookDetailView: View {
                                             Button(action: goBack) {
                                                 Image(systemName: "chevron.left").font(.title3.bold())
                                                     .foregroundColor(.gray)
-                                                    .padding(12) // Slightly smaller back button
+                                                    .padding(12)
                                                     .background(Color(UIColor.systemGray6))
                                                     .clipShape(Circle())
                                             }
@@ -114,13 +120,12 @@ struct BookDetailView: View {
                                             .foregroundColor(.white)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 10)
-                                            // --- THE FIX: Updated background and shadow to orange ---
                                             .background(orangeButtonColor)
                                             .clipShape(Capsule())
                                             .shadow(color: orangeButtonColor.opacity(0.4), radius: 6, x: 0, y: 3)
                                         }
                                     }
-                                    .padding(.top, 12) // Spacing between text and buttons
+                                    .padding(.top, 12)
                                 }
                                 .padding(.leading, 32)
                                 .padding(.top, 32)
