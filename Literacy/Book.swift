@@ -336,6 +336,151 @@ let mockBooks = [
             QuizQuestion(questionText: "Apakah ibu, adik, dan kakak bekerja sama di rumah?", correctAnswer: true),
             QuizQuestion(questionText: "Apakah penting untuk saling bekerja sama di rumah?", correctAnswer: true)
         ]
+    ),
+    Book(
+        title: "Mendengarkan Tubuhku",
+        imageName: "mendengarkan-cover",
+        category: .d,
+        duration: .low,
+        storyPages: [
+            StoryPage(text: "Hari ini aku tidak masuk sekolah.", imageName: "mendengarkan-p-1"),
+            StoryPage(text: "Asik, hari ini libur!", imageName: "mendengarkan-p-2"),
+            StoryPage(text: "Tapi aku tidak akan nonton TV.", imageName: "mendengarkan-p-3"),
+            StoryPage(text: "Kebetulan listriknya mati.", imageName: "mendengarkan-p-4"),
+            StoryPage(text: "Apa yang bisa kulakukan ya?", imageName: "mendengarkan-p-5"),
+            StoryPage(text: "Ah, aku mau mendengarkan tubuhku!", imageName: "mendengarkan-p-6"),
+            StoryPage(
+                text: """
+                    Pertama, aku harus diam
+                    dan tidak
+                    bersuara. Sehingga aku bisa
+                    mendengarkan tubuhku
+                    sendiri.
+                    """,
+                imageName: "mendengarkan-p-7"
+            ),
+            StoryPage(
+                text: """
+                    Sekarang aku bisa
+                    mendengarkan
+                    nafasku.
+                    Tarik... hembuskan... tarik...
+                    hembuskan...
+                    """,
+                imageName: "mendengarkan-p-8"
+            ),
+            StoryPage(
+                text: """
+                    Dan aku bisa membuatnya
+                    terdengar lebih keras ...
+                    Ssssssss!
+                    Atau lebih lembut ...
+                    Mmmmmm
+                    """,
+                imageName: "mendengarkan-p-9"
+            ),
+            StoryPage(
+                text: """
+                    Lalu aku mendengarkan
+                    degup jantungku.
+                    Digdug, digdug, digdug.
+                    """,
+                imageName: "mendengarkan-p-10"
+            ),
+            StoryPage(
+                text: """
+                    Bisakah aku membuatnya
+                    berdegup lebih kencang
+                    dan keras?
+                    Tentu saja, dengan
+                    melompat-lompat dua
+                    puluh kali.
+                    """,
+                imageName: "mendengarkan-p-11"
+            ),
+            StoryPage(
+                text: """
+                    Nah, sekarang jantungku
+                    berdebar lebih kencang.
+                    Dagdigdug, dagdigdug,
+                    dagdigdug!
+                    """,
+                imageName: "mendengarkan-p-12"
+            ),
+            StoryPage(
+                text: """
+                    Kalau aku meletakkan
+                    jari-jariku di pergelangan
+                    tanganku, aku bisa
+                    merasakan denyut nadiku.
+                    """,
+                imageName: "mendengarkan-p-13"
+            ),
+            StoryPage(
+                text: """
+                    Aku bisa mendengarkan
+                    tawaku sendiri.
+                    Hahahaha!
+                    """,
+                imageName: "mendengarkan-p-14"
+            ),
+            StoryPage(
+                text: """
+                    Juga tangisku.
+                    Huhuhuhu!
+                    """,
+                imageName: "mendengarkan-p-15"
+            ),
+            StoryPage(
+                text: """
+                    Demikian pula tepukan
+                    tanganku.
+                    Plok plok plok.
+                    """,
+                imageName: "mendengarkan-p-16"
+            ),
+            StoryPage(
+                text: """
+                    Namun semua suara itu tak
+                    bisa mengalahkan suara
+                    perutku yang keroncongan.
+                    Kruyuk kruyuk kruyuk...
+                    """,
+                imageName: "mendengarkan-p-17"
+            ),
+            StoryPage(text: "Pertanda aku perlu makan.", imageName: "mendengarkan-p-18"),
+            StoryPage(text: "Hidungku bisa mencium gorengan di dapur.", imageName: "mendengarkan-p-19"),
+            StoryPage(
+                text: """
+                    Menyenangkan sekali
+                    permainan ini.
+                    Sekarang aku ingin
+                    mendengar suara gigiku
+                    mengunyah.
+                    """,
+                imageName: "mendengarkan-p-20"
+            ),
+            StoryPage(
+                text: """
+                    Dan juga suara perutku
+                    mengolah kue Jalebi
+                    (makanan khas India)
+                    buatan ibu.
+                    """,
+                imageName: "mendengarkan-p-21"
+            ),
+            StoryPage(
+                text: "Cocokkan suara dengan bagian tubuh Tangan Bersiul Bibir Tepuk tangan Kaki Hentakan",
+                imageName: "mendengarkan-p-22"
+            ),
+        ],
+        quizQuestions: [
+            QuizQuestion(questionText: "Apakah nafas bisa didengar dari hembusan?", correctAnswer: true),
+            QuizQuestion(questionText: "Apakah jantung bisa berdegup? Kamu bisa tirukan bunyinya!", correctAnswer: true),
+            QuizQuestion(questionText: "Apakah jantung bisa berdegup lebih kencang lagi?", correctAnswer: true),
+            QuizQuestion(questionText: "Apakah matamu yang membuatmu bisa mendengar?", correctAnswer: false),
+            QuizQuestion(questionText: "Apakah perut yang keroncongan butuh makan?", correctAnswer: true)
+        ]
     )
     
     // Note: You will need to update Categories B, C, D, E, and F in your own file using this same `StoryPage(text: "", imageName: "")` format!
