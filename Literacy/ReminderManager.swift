@@ -57,8 +57,8 @@ class ReminderManager: ObservableObject {
     // --- NOTIFICATION ENGINE ---
     private func scheduleNotifications(for reminder: ReadingReminder) {
         let content = UNMutableNotificationContent()
-        content.title = "Time for an Adventure! 📖"
-        content.body = "Your books are waiting. Let's read together!"
+        content.title = "Saatnya Membaca Cerita"
+        content.body = "Ayo Jangan Lewati Bacaan Hari Ini"
         content.sound = .default
         
         let calendar = Calendar.current

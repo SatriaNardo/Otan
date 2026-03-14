@@ -341,7 +341,7 @@ let mockBooks = [
         title: "Mendengarkan Tubuhku",
         imageName: "mendengarkan-cover",
         category: .d,
-        duration: .low,
+        duration: .medium,
         storyPages: [
             StoryPage(text: "Hari ini aku tidak masuk sekolah.", imageName: "mendengarkan-p-1"),
             StoryPage(text: "Asik, hari ini libur!", imageName: "mendengarkan-p-2"),

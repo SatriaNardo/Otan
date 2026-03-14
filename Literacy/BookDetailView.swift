@@ -37,23 +37,32 @@ struct BookDetailView: View {
                         
                         Spacer()
                         
-                        // --- THE FIX: Continuous Progress Bar ---
-                        GeometryReader { barGeo in
-                            ZStack(alignment: .leading) {
-                                // 1. Empty gray track (Background)
-                                Capsule()
-                                    .fill(Color.gray.opacity(0.3))
-                                
-                                // 2. Filled orange track (Foreground)
-                                Capsule()
-                                    .fill(orangeButtonColor)
-                                    // Calculates the percentage of completion
-                                    .frame(width: barGeo.size.width * (CGFloat(currentPageIndex + 1) / CGFloat(totalPages)))
-                                    .animation(.spring(response: 0.5, dampingFraction: 0.8), value: currentPageIndex)
+                        // --- THE FIX: Simplified Page Text ---
+                        VStack(spacing: 6) {
+                            // Text showing current page / total pages (e.g., "4/19")
+                            Text("\(currentPageIndex + 1)/\(totalPages)")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
+                            
+                            // Continuous Progress Bar
+                            GeometryReader { barGeo in
+                                ZStack(alignment: .leading) {
+                                    // 1. Empty gray track (Background)
+                                    Capsule()
+                                        .fill(Color.gray.opacity(0.3))
+                                    
+                                    // 2. Filled orange track (Foreground)
+                                    Capsule()
+                                        .fill(orangeButtonColor)
+                                        // Calculates the percentage of completion
+                                        .frame(width: barGeo.size.width * (CGFloat(currentPageIndex + 1) / CGFloat(totalPages)))
+                                        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: currentPageIndex)
+                                }
                             }
+                            .frame(height: 8) // Thickness of the bar
                         }
-                        .frame(height: 8) // Thickness of the bar
-                        .frame(maxWidth: 300) // Prevents the bar from getting too long on big screens
+                        .frame(maxWidth: 300) // Prevents the bar from getting too wide
                         
                         Spacer()
                         
