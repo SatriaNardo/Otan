@@ -15,19 +15,10 @@ struct ContentView: View {
                         removal: .move(edge: .bottom).combined(with: .opacity)
                     ))
             } else {
-                // --- 3. MAIN INTERFACE (No more TabView!) ---
+                // --- 3. MAIN INTERFACE ---
                 NavigationStack {
                     LibraryListView()
-                        // Optional: Add a settings button to the top right
-                        // since the bottom tab for Settings is gone
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                NavigationLink(destination: SettingsView()) {
-                                    Image(systemName: "gearshape.fill")
-                                        .foregroundColor(.orange)
-                                }
-                            }
-                        }
+                    // The .toolbar block has been removed from here
                 }
                 .transition(.opacity)
             }
