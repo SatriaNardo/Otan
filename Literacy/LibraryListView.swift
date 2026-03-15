@@ -7,12 +7,12 @@ struct LibraryListView: View {
     @State private var selectedBook: Book? = nil
     @State private var isReadyForBook: Bool = false
     
-    // --- NEW: Helper to check if we are filtering ---
+    // --- Helper to check if we are filtering ---
     private var isFiltering: Bool {
         selectedCategory != nil || selectedDuration != nil
     }
     
-    // --- NEW: Helper to get filtered books for the vertical list ---
+    // --- Helper to get filtered books for the vertical list ---
     private var filteredBooks: [Book] {
         mockBooks.filter { book in
             let matchesCategory = (selectedCategory == nil || book.category == selectedCategory)
@@ -59,7 +59,6 @@ struct LibraryListView: View {
                             if isFiltering {
                                 // 1. FILTERED VIEW: Title + Large Vertical Cards
                                 VStack(spacing: 24) {
-                                    // Keep the dynamic title here!
                                     if let title = dynamicTitle {
                                         Text(title)
                                             .font(.headline)
@@ -99,6 +98,8 @@ struct LibraryListView: View {
                 .scrollBounceBehavior(.basedOnSize)
                 .background(Color.white)
                 .ignoresSafeArea(edges: .top)
+                // --- THE FIX: This removes the invisible Navigation Bar gap ---
+                .toolbar(.hidden, for: .navigationBar)
                 
                 .onChange(of: selectedCategory) { scrollToTop(proxy) }
                 .onChange(of: selectedDuration) { scrollToTop(proxy) }
@@ -166,4 +167,3 @@ struct LibraryListView: View {
         selectedBook = book
     }
 }
-

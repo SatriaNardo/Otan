@@ -481,6 +481,97 @@ let mockBooks = [
             QuizQuestion(questionText: "Apakah matamu yang membuatmu bisa mendengar?", correctAnswer: false),
             QuizQuestion(questionText: "Apakah perut yang keroncongan butuh makan?", correctAnswer: true)
         ]
+    ),
+    
+    Book(
+        title: "Sam Bertumbuh Besar",
+        imageName: "sam-cover",
+        category: .a,
+        duration: .low,
+        storyPages: [
+            StoryPage(
+                text: """
+                    Ini Sam. 
+                    Sam adalah biji yang sangat, sangat kecil.
+                    Saat ini, ia sedang tertidur di tanah coklat yang dalam dan nyaman. 
+                    """,
+                imageName: "sam-p-1"
+            ),
+            StoryPage(
+                text: """
+                    Tes, Tes! Byur, byur!
+                    Tiba tiba datanglah Hujan. 
+                    “Bangun, Sam! Ini waktunya untuk minum.” Kata Hujan 
+                    """,
+                imageName: "sam-p-2"
+            ),
+            StoryPage(
+                text: """
+                    Tringg!
+                    Muncullah matahari dengin sinarnya yang terang. 
+                    “Gerakkan badanmu, Sam! Ini waktunya untuk menghangatkan diri.” Kata Matahari. 
+                    """,
+                imageName: "sam-p-3"
+            ),
+            StoryPage(
+                text: """
+                    Sam menarik badannya. Akar Sam tumbuh ke bawah.
+                    Sam ingin tumbuh tinggi.
+                    """,
+                imageName: "sam-p-4"
+            ),
+            StoryPage(
+                text: """
+                    Pop! Muncul tunas hijau.
+                    Sam punya topi baru!
+                    Sam keluar dari tanah
+                    """,
+                imageName: "sam-p-5"
+            ),
+            StoryPage(
+                text: """
+                    Sam tumbuh semakin tinggi. Daun Sam lebar dan kuat. 
+                    Sam suka menari ditiup angin. 
+                    """,
+                imageName: "sam-p-6"
+            ),
+            StoryPage(
+                text: """
+                    Lihat di atas kepala Sam! Ada kuncup bunga kecil. 
+                    Sam sudah tidak sabar.
+                    """,
+                imageName: "sam-p-7"
+            ),
+            StoryPage(
+                text: """
+                    Wah, mekar! Bunga Sam berwarna pink.
+                    Cantik dan harum sekali.
+                    """,
+                imageName: "sam-p-8"
+            ),
+            StoryPage(
+                text: """
+                    Zuzzz... Bella datang! "Halo, Bunga Pink!" kata Bella. 
+                    Mereka bermain bersama
+                    """,
+                imageName: "sam-p-9"
+            ),
+            StoryPage(
+                text: """
+                    
+                    Wuuush! Angin bertiup kencang. Biji-biji kecil Sam terbang jauh. 
+                    Dadah, Sam!
+                    """,
+                imageName: "sam-p-10"
+            ),
+        ],
+        quizQuestions: [
+            QuizQuestion(questionText: "Apakah Sam batu kecil yang tertidur di tanah?", correctAnswer: false),
+            QuizQuestion(questionText: "Apakah hujan membantu Sam minum agar ia bangun?", correctAnswer: true),
+            QuizQuestion(questionText: "Apakah Sam tumbuh topi kecil dan bunga cantik?", correctAnswer: true),
+            QuizQuestion(questionText: "Apakah tumbuhan butuh air dan matahari untuk tumbuh, seperti kamu butuh makanan sehat dan bergizi?", correctAnswer: true),
+            QuizQuestion(questionText: "Haruskah kita bersikap baik terhadap tumbuhan yang ada di alam?", correctAnswer: true)
+        ]
     )
     
     // Note: You will need to update Categories B, C, D, E, and F in your own file using this same `StoryPage(text: "", imageName: "")` format!
