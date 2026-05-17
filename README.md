@@ -1,0 +1,1 @@
+An app for working parents who want to improve their children’s literacy skills but have limited time to prepare learning activities, helping them through curated stories, evaluation quizzes, and reminders.
